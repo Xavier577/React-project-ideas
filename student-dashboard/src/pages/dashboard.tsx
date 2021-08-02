@@ -8,7 +8,7 @@ import ActivityStats from "../components/activityStats";
 
 const DashBoard = () => {
   const { data } = useStudentRecords("studentData");
-  const cloneData = templateData as unknown as StudentData[];
+  const cloneData = [...data]; //templateData as unknown as StudentData[];
   return (
     <main className={Style["dashboard-page"]}>
       <ActivityStats data={cloneData} />
@@ -19,13 +19,7 @@ const DashBoard = () => {
           <option value={entry.name} key={entry.code} />
         ))}
       </datalist>
-      <StudentTable
-        data={
-          templateData.sort((a, b) =>
-            a.name < b.name ? -1 : 1
-          ) as unknown as StudentData[]
-        }
-      />
+      <StudentTable data={cloneData} />
     </main>
   );
 };

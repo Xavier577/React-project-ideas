@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { StudentData } from "../types/types";
+import { FieldParams, StudentData } from "../types/types";
 
 export default function useStudentRecords(
   key: string,
@@ -14,7 +14,9 @@ export default function useStudentRecords(
 
   useEffect(() => {
     if (value) {
-      studentData.add(value);
+      let fields = [...Object.keys(value)] as FieldParams[];
+      let isEmpty = fields.every((field) => value[field] === "");
+      if (!isEmpty) studentData.add(value);
     }
   }, [value]);
 
