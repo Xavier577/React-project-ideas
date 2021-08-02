@@ -8,7 +8,7 @@ import ActivityStats from "../components/activityStats";
 
 const DashBoard = () => {
   const { data } = useStudentRecords("studentData");
-  const cloneData = [...data]; //templateData as unknown as StudentData[];
+  const cloneData = templateData as unknown as StudentData[];
   return (
     <main className={Style["dashboard-page"]}>
       <ActivityStats data={cloneData} />
