@@ -1,0 +1,41 @@
+/* Home page */
+.homepage {
+  background: #545d6285;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.central-text {
+  color: whitesmoke;
+  text-align: center;
+  width: 70%;
+  height: 50%;
+}
+
+/* Dashboard page */
+.dashboard-page {
+  display: flex;
+  /* background-color: rgb(47, 255, 203); */
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Admin page */
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.admin-components-container {
+  justify-self: center;
+  position: inherit;
+  width: 40%;
+  height: 40%;
+}

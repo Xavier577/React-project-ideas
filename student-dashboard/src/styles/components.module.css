@@ -1,0 +1,100 @@
+/* navigation bar component styles */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  /* box-shadow: 5px 6px 8px #cccccc6b; */
+  height: 5rem;
+}
+
+.nav-text {
+  margin-left: 15px;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #090a16;
+}
+
+.nav-bar > ul {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  height: 50%;
+  align-items: center;
+}
+
+.nav-bar ul li {
+  list-style: none;
+}
+
+.nav-links {
+  text-decoration: none;
+  color: #090a16;
+}
+
+.nav-text:hover,
+.nav-links:hover {
+  color: #8f8e8d;
+}
+
+/* Student table component */
+.student-table-container {
+  width: auto;
+  height: auto;
+}
+
+.student-table,
+th,
+tr,
+td {
+  border: 1px solid black;
+  padding: 1rem;
+  border-collapse: collapse;
+}
+
+/* Activity Stats  */
+.activity-stats {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.total,
+.active,
+.inactive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  height: 100px;
+  width: 170px;
+  border-radius: 1rem;
+  color: whitesmoke;
+}
+
+.total {
+  background-color: #020405;
+}
+.active {
+  background-color: #ff6347;
+}
+.inactive {
+  background-color: rgb(0, 70, 128);
+}
+
+/* Filter Selector component */
+
+.filter-component {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40%;
+}
+
+.filter-component > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
