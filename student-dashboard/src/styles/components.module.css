@@ -55,6 +55,7 @@ td {
   text-transform: capitalize;
   padding: 1rem;
   border-collapse: collapse;
+  cursor: pointer;
 }
 .student-table,
 tr,
@@ -68,17 +69,28 @@ th,
 tr:nth-child(2n) {
   background-color: white;
 }
+
+tr:hover,
+td:hover {
+  background-color: wheat;
+  color: white !important;
+}
 /* pagination bar */
 .pagination-bar {
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid whitesmoke;
   display: inline-flex;
+  cursor: pointer;
 }
 
 .pagination-bar li {
-  border-left: 1px solid black;
+  border-left: 1px solid whitesmoke;
   padding: 1rem;
   list-style: none;
+}
+
+.pagination-bar li:nth-child(2n) {
+  background-color: whitesmoke;
 }
 
 /* Activity Stats  */

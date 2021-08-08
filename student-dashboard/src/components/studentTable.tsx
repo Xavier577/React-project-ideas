@@ -11,7 +11,7 @@ export default class StudentTable extends Component<
     super(props);
     this.state = {
       currentPage: 1,
-      studentsPerPage: 5,
+      studentsPerPage: 10,
     };
   }
   private handleClick = (event: MouseEvent<HTMLLIElement>) => {
