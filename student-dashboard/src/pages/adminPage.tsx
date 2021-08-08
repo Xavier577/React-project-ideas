@@ -1,21 +1,10 @@
 import { useRef, useState } from "react";
 import FormEntry from "../components/formEntry";
+import StudentTable from "../components/studentTable";
 import useStudentRecords from "../hooks/useStudentRecord";
 import Style from "../styles/pages.module.css";
-import { FieldParams, StudentData } from "../types/types";
-
-function retrieveFormData(
-  formElement: NodeListOf<HTMLInputElement | HTMLButtonElement>
-) {
-  let dataEntry: any = {};
-  Array.from(formElement).forEach((element) => {
-    if (element.name as FieldParams) {
-      dataEntry[element.name] = element.value;
-    }
-  });
-
-  return dataEntry as StudentData;
-}
+import { StudentData } from "../types/types";
+import { retrieveFormData } from "../utils/utils";
 
 const AdminPage = () => {
   const [show, setShow] = useState(false);
@@ -26,7 +15,7 @@ const AdminPage = () => {
   function formDataHandler(
     formElement: NodeListOf<HTMLInputElement | HTMLButtonElement>
   ) {
-    setEntry(retrieveFormData(formElement));
+    setEntry(retrieveFormData(formElement) as StudentData);
   }
   function removeFromRecord(
     formElement: NodeListOf<HTMLInputElement | HTMLButtonElement>
@@ -39,6 +28,8 @@ const AdminPage = () => {
   return (
     <main className={Style["admin-page"]}>
       <h1>Student Management</h1>
+      <FormEntry formReference={formRef} formDataHandler={formDataHandler} />
+      <pre>{JSON.stringify(data)}</pre>
       <button onClick={() => setShow((current) => !current)}>Remove</button>
       {show ? (
         <>
@@ -48,8 +39,7 @@ const AdminPage = () => {
           />
         </>
       ) : null}
-      <FormEntry formReference={formRef} formDataHandler={formDataHandler} />
-      <pre>{JSON.stringify(data)}</pre>
+      <StudentTable data={data} />
     </main>
   );
 };

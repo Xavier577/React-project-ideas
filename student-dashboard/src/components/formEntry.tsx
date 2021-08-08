@@ -2,7 +2,11 @@ import { FC, FormEvent, Fragment } from "react";
 import useForm from "../hooks/useForm";
 import { FormEntryProps } from "../types/types";
 
-const FormEntry: FC<FormEntryProps> = ({ formReference, formDataHandler }) => {
+const FormEntry: FC<FormEntryProps> = ({
+  formReference,
+  formDataHandler,
+  editMode,
+}) => {
   const { values, handleChange } = useForm({
     name: "",
     status: "",
@@ -24,13 +28,20 @@ const FormEntry: FC<FormEntryProps> = ({ formReference, formDataHandler }) => {
           onChange={handleChange}
           required
         />
-        <input
-          type="text"
-          name="status"
-          placeholder="status"
+        <select
           value={values.status}
           onChange={handleChange}
-        />
+          name="status"
+          id="status"
+          required
+        >
+          <option disabled value="">
+            status of Students
+          </option>
+          <option>Active</option>
+          <option>Inactive</option>
+          <option>Progress</option>
+        </select>
         <input
           type="text"
           name="country"

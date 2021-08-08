@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { capitaliseRoute } from "../utils/utils";
 import useSessionStorage from "./useSessionStorage";
 
@@ -7,6 +7,11 @@ const useDynamicLabel = () => {
     JSON.parse(sessionStorage.getItem("pageLabel") as string) ??
       capitaliseRoute(window.location.pathname.split("/").join(""))
   );
+
+  useEffect(() => {
+    let label = capitaliseRoute(window.location.pathname.split("/").join(""));
+    setPageLabel(label);
+  }, [pageLabel]);
 
   useSessionStorage("pageLabel", pageLabel);
   return {

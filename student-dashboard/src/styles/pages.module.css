@@ -17,7 +17,6 @@
 /* Dashboard page */
 .dashboard-page {
   display: flex;
-  /* background-color: rgb(47, 255, 203); */
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;

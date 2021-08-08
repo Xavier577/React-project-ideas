@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from "react";
-import { FormValueTypes } from "../types/types";
+import { FormFields } from "../types/types";
 
-export default function useForm(initialValues: FormValueTypes) {
+export default function useForm<T>(initialValues: T) {
   const [values, setValues] = useState(initialValues);
   return {
     values,
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => {
+    handleChange: (e: ChangeEvent<FormFields>) => {
       setValues((currentValues) => ({
         ...currentValues,
         [e.target.name]: e.target.value,

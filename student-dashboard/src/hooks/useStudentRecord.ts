@@ -12,13 +12,21 @@ export default function useStudentRecords(
     )
   );
 
-  useEffect(() => {
-    if (value) {
-      let fields = [...Object.keys(value)] as FieldParams[];
-      let isEmpty = fields.every((field) => value[field] === "");
-      if (!isEmpty) studentData.add(value);
-    }
-  }, [value]);
+  useEffect(
+    () => {
+      if (value) {
+        let fields = [...Object.keys(value)] as FieldParams[];
+        let containsEmptyField = fields.some(
+          (field) =>
+            value[field] === null ||
+            value[field] === undefined ||
+            value[field] === ""
+        );
+        if (!containsEmptyField) studentData.add(value);
+      }
+    }, //eslint-disable-next-line
+    [value]
+  );
 
   return { data: studentData.store, controller: studentData };
 }

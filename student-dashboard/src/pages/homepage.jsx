@@ -1,4 +1,5 @@
 import Style from "../styles/pages.module.css";
+
 const HomePage = () => {
   return (
     <main className={Style["homepage"]}>

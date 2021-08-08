@@ -1,40 +1,78 @@
-import { FC } from "react";
+import { Component, Fragment, MouseEvent } from "react";
+import usePaginate from "../hooks/usePaginate";
 import Style from "../styles/components.module.css";
-import { StudentData } from "../types/types";
+import { StudentTableComponent as STC } from "../types/types";
 
-const StudentTable: FC<{ data?: StudentData[] }> = ({ data }) => {
-  return (
-    <div className={Style["student-table-container"]}>
-      {data?.length ? (
-        <table className={Style["student-table"]}>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Country</th>
-              <th>City</th>
-              <th>Code</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.map((student, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{student?.name}</td>
-                <td>{student?.status}</td>
-                <td>{student?.country}</td>
-                <td>{student?.city}</td>
-                <td>{student?.code}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        "No student currently in record..."
-      )}
-    </div>
-  );
-};
+export default class StudentTable extends Component<
+  STC["props"],
+  STC["state"]
+> {
+  constructor(props: STC["props"]) {
+    super(props);
+    this.state = {
+      currentPage: 1,
+      studentsPerPage: 5,
+    };
+  }
+  private handleClick = (event: MouseEvent<HTMLLIElement>) => {
+    this.setState({
+      currentPage: Number(event.currentTarget.id),
+    });
+  };
 
-export default StudentTable;
+  private goToPrevious = () => {
+    this.setState({
+      currentPage: this.state.currentPage - 1,
+    });
+  };
+
+  private goToNext = () => {
+    this.setState({
+      currentPage: this.state.currentPage + 1,
+    });
+  };
+
+  render() {
+    const { currentPage } = this.state;
+    const { data } = this.props;
+    //eslint-disable-next-line
+    const { renderPageNumbers, renderTableBody, pageNumbers } = usePaginate(
+      data,
+      this.state,
+      this.handleClick
+    );
+
+    return (
+      <div className={Style["student-table-container"]}>
+        {this.props.data?.length ? (
+          <Fragment>
+            <table className={Style["student-table"]}>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Country</th>
+                  <th>City</th>
+                  <th>Code</th>
+                </tr>
+              </thead>
+              <tbody>{renderTableBody}</tbody>
+            </table>
+            <ul className={Style["pagination-bar"]}>
+              {currentPage > 1 ? (
+                <li onClick={this.goToPrevious}>prev</li>
+              ) : null}
+              {renderPageNumbers}
+              {currentPage < pageNumbers[pageNumbers.length - 1] ? (
+                <li onClick={this.goToNext}>next</li>
+              ) : null}
+            </ul>
+          </Fragment>
+        ) : (
+          "No student currently in record..."
+        )}
+      </div>
+    );
+  }
+}
