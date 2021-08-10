@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { MouseEventHandler, RefObject } from "react";
 
 export interface FormEntryProps {
   formReference?: RefObject<HTMLFormElement>;
@@ -18,11 +18,12 @@ export interface StudentData {
   code: number;
 }
 
-export interface FilterComponentProp {
+export interface FilterComponentProps {
   data?: StudentData[];
   filterRef?: RefObject<HTMLFormElement>;
   typingFilterFunction?: Function;
   selectorFilterFunction?: Function;
+  jointFilterFunction?: Function;
 }
 
 export type FieldParams = "name" | "status" | "city" | "country" | "code";
@@ -33,11 +34,22 @@ export type FormFields =
   | HTMLInputElement
   | HTMLTextAreaElement;
 
-export interface FilterType {
+export interface FilterFields {
   filterByName: string;
   filterByCountry: string;
   filterByCity: string;
   filterByStatus: "active" | "inactive" | "progress";
+}
+
+export type FilterParams =
+  | "filterByName"
+  | "filterByCountry"
+  | "filterByCity"
+  | "filterByStatus";
+
+export interface SearchBarProps {
+  data?: StudentData[];
+  searchFilter?: Function;
 }
 
 export interface StudentTableComponent {
@@ -48,5 +60,11 @@ export interface StudentTableComponent {
     currentPage: number;
     studentsPerPage: number;
     isCurrent?: boolean;
+    record: StudentData[];
   };
+}
+
+export interface SortComponentProps {
+  data?: StudentData[];
+  sortFunction?: MouseEventHandler<FormFields>;
 }

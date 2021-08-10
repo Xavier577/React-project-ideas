@@ -1,16 +1,14 @@
 import { FC } from "react";
 import useForm from "../hooks/useForm";
-import { StudentData } from "../types/types";
-const SearchBar: FC<{ data?: StudentData[]; searchFilter?: Function }> = ({
-  data,
-  searchFilter,
-}) => {
-  const { values, handleChange } = useForm({
-    search: "",
-  });
+import { SearchBarProps } from "../types/types";
+import Style from "../styles/components.module.css";
+
+const SearchBar: FC<SearchBarProps> = ({ data, searchFilter }) => {
+  const { values, handleChange } = useForm({ search: "" });
   return (
-    <div>
+    <div className={Style["search-bar-container"]}>
       <input
+        className={Style["search-bar"]}
         type="text"
         value={values.search}
         onChange={(event) => {
@@ -21,7 +19,11 @@ const SearchBar: FC<{ data?: StudentData[]; searchFilter?: Function }> = ({
         list="data"
         placeholder="search"
       />
-      <datalist itemID="data" id="data">
+      <datalist
+        className={Style["search-bar-suggestions"]}
+        itemID="data"
+        id="data"
+      >
         {data?.map((entry, index) => (
           <option value={entry.name} key={index} />
         ))}

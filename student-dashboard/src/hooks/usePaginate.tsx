@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, RefObject } from "react";
 import { StudentData } from "../types/types";
 
 const usePaginate = (
@@ -6,7 +6,10 @@ const usePaginate = (
   {
     currentPage,
     studentsPerPage,
-  }: { currentPage: number; studentsPerPage: number },
+  }: {
+    currentPage: number;
+    studentsPerPage: number;
+  },
   clickFunction: MouseEventHandler<HTMLLIElement>
 ) => {
   const indexOfLastTodo = currentPage * studentsPerPage;

@@ -1,13 +1,14 @@
 import { FC } from "react";
 import useForm from "../hooks/useForm";
-import { FilterComponentProp } from "../types/types";
+import { FilterComponentProps } from "../types/types";
 import Style from "../styles/components.module.css";
 
-const FilterComponent: FC<FilterComponentProp> = ({
+const FilterComponent: FC<FilterComponentProps> = ({
   data,
   filterRef,
   typingFilterFunction,
   selectorFilterFunction,
+  jointFilterFunction,
 }) => {
   const { values, handleChange } = useForm({
     filterByName: "",
@@ -81,6 +82,9 @@ const FilterComponent: FC<FilterComponentProp> = ({
         <option>Inactive</option>
         <option>Progress</option>
       </select>
+      <button type="submit" onClick={(event) => jointFilterFunction?.(event)}>
+        Filter
+      </button>
     </form>
   );
 };

@@ -12,7 +12,7 @@ const useTypingFilter = (
 
       if (typed.split("").length > 0) {
         let dataHelper = data.filter((data) =>
-          typed.split("").some((char) => data.name.includes(char))
+          typed.split("").some((char) => data.name.includes(char.toLowerCase()))
         );
         clonedStateDispatcher(() => dataHelper);
       } else {

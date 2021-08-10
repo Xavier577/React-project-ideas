@@ -71,10 +71,12 @@ tr:nth-child(2n) {
 }
 
 tr:hover,
-td:hover {
-  background-color: wheat;
-  color: white !important;
+:is(tr:hover) td {
+  background-color: #61605e;
+  color: white;
+  border: none;
 }
+
 /* pagination bar */
 .pagination-bar {
   background-color: white;
@@ -91,6 +93,12 @@ td:hover {
 
 .pagination-bar li:nth-child(2n) {
   background-color: whitesmoke;
+}
+
+.current-page,
+.next-page-btn {
+  background-color: #61605e !important;
+  color: white !important;
 }
 
 /* Activity Stats  */
@@ -129,7 +137,7 @@ td:hover {
   background-color: #ff6347;
 }
 .activity-stats {
-  background-color: rgb(0, 70, 128);
+  background-color: #004680;
 }
 
 /* Filter Selector component */
@@ -141,4 +149,44 @@ td:hover {
   gap: 15px;
   align-items: center;
   width: 50%;
+}
+
+.filter-component input,
+.filter-component select,
+.filter-component button {
+  background-color: white;
+  border: none;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+
+.filter-component button {
+  background-color: #61605e !important;
+  color: whitesmoke !important;
+}
+
+/* Sort component */
+.sort-selector,
+.sort-btn {
+  background-color: white;
+  border: none;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+
+.sort-btn {
+  background-color: #61605e !important;
+  color: white !important;
+}
+
+/* Search bar */
+
+.search-bar {
+  padding: 0.3rem;
+  border: 1px solid rgb(201, 196, 196);
+}
+
+.search-bar:focus {
+  border: 1px solid #61605e;
+  outline: 1px solid #004680;
 }
