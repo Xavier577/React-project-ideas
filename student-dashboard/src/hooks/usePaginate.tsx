@@ -1,5 +1,7 @@
-import { MouseEventHandler, RefObject } from "react";
+import { MouseEventHandler } from "react";
 import { StudentData } from "../types/types";
+import EditIcon from "../components/editIcon";
+import DeleteIcon from "../components/deleteIcon";
 
 const usePaginate = (
   data: StudentData[] | undefined,
@@ -10,7 +12,8 @@ const usePaginate = (
     currentPage: number;
     studentsPerPage: number;
   },
-  clickFunction: MouseEventHandler<HTMLLIElement>
+  clickFunction: MouseEventHandler<HTMLLIElement>,
+  editable?: boolean
 ) => {
   const indexOfLastTodo = currentPage * studentsPerPage;
   const indexOfFirstTodo = indexOfLastTodo - studentsPerPage;
@@ -41,11 +44,17 @@ const usePaginate = (
     return (
       <tr key={indexInFullData || index}>
         <td>{(indexInFullData || index) + 1}</td>
-        <td>{student?.name}</td>
-        <td>{student?.status}</td>
-        <td>{student?.country}</td>
-        <td>{student?.city}</td>
-        <td>{student?.code}</td>
+        <td id="name">{student?.name}</td>
+        <td id="status">{student?.status}</td>
+        <td id="country">{student?.country}</td>
+        <td id="city">{student?.city}</td>
+        <td id="code">{student?.code}</td>
+        {editable ? (
+          <td>
+            <EditIcon />
+            <DeleteIcon />
+          </td>
+        ) : null}
       </tr>
     );
   });

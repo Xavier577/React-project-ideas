@@ -18,6 +18,7 @@ const SortComponent: FC<SortComponentProps> = ({ sortFunction }) => {
           <option>name</option>
           <option>country</option>
           <option>city</option>
+          <option>code</option>
         </select>
         <button
           className={Style["sort-btn"]}

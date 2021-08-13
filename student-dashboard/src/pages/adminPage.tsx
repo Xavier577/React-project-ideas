@@ -1,45 +1,21 @@
-import { useRef, useState } from "react";
-import FormEntry from "../components/formEntry";
+import SearchBar from "../components/searchBar";
 import StudentTable from "../components/studentTable";
+import useSearchFilter from "../hooks/useSearchFilter";
 import useStudentRecords from "../hooks/useStudentRecord";
+import useTableData from "../hooks/useTableData";
 import Style from "../styles/pages.module.css";
-import { StudentData } from "../types/types";
-import { retrieveFormData } from "../utils/utils";
 
 const AdminPage = () => {
-  const [show, setShow] = useState(false);
-  const [entry, setEntry] = useState<StudentData>();
-  const { data, controller } = useStudentRecords("studentData", entry);
-  const formRef = useRef<HTMLFormElement>(null);
-  const formRemoverRef = useRef<HTMLFormElement>(null);
-  function formDataHandler(
-    formElement: NodeListOf<HTMLInputElement | HTMLButtonElement>
-  ) {
-    setEntry(retrieveFormData(formElement) as StudentData);
-  }
-  function removeFromRecord(
-    formElement: NodeListOf<HTMLInputElement | HTMLButtonElement>
-  ) {
-    let dataEntry = retrieveFormData(formElement);
+  const { data } = useStudentRecords("studentData");
+  const {tableData, setTableData} = useTableData()
+  const { searchFilter } = useSearchFilter(data, setTableData);
 
-    controller.remove(dataEntry);
-  }
-
+ 
   return (
     <main className={Style["admin-page"]}>
       <h1>Student Management</h1>
-      <FormEntry formReference={formRef} formDataHandler={formDataHandler} />
-      <pre>{JSON.stringify(data)}</pre>
-      <button onClick={() => setShow((current) => !current)}>Remove</button>
-      {show ? (
-        <>
-          <FormEntry
-            formDataHandler={removeFromRecord}
-            formReference={formRemoverRef}
-          />
-        </>
-      ) : null}
-      <StudentTable data={data} />
+      <SearchBar data={tableData} searchFilter={searchFilter} />
+      <StudentTable data={data} editable />
     </main>
   );
 };

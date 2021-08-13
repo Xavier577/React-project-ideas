@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FieldParams, StudentData } from "../types/types";
+import useTableData from "./useTableData";
 
 export default function useStudentRecords(
   key: string,
@@ -22,7 +23,9 @@ export default function useStudentRecords(
             value[field] === undefined ||
             value[field] === ""
         );
-        if (!containsEmptyField) studentData.add(value);
+        if (!containsEmptyField) {
+          studentData.add(value);
+        }
       }
     }, //eslint-disable-next-line
     [value]
@@ -57,7 +60,8 @@ export class StudentStore {
       this.helperStore.push(value);
       this.setStore(() => this.helperStore);
       this.saveToLocalStorage();
-    }
+      alert(`${value.name} has been added to the record`);
+    } else alert(`student with code ${value.code} already exist in record`);
   }
   public remove(value: StudentData) {
     let valueIdx = this.indexOf(value);

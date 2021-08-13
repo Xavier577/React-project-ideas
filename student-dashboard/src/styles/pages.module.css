@@ -23,6 +23,14 @@
   gap: 10px;
 }
 
+.search-sort-container {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
 /* Admin page */
 .admin-page {
   display: flex;
@@ -30,11 +38,5 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
-}
-
-.admin-components-container {
-  justify-self: center;
-  position: inherit;
-  width: 40%;
-  height: 40%;
+  gap: 15px;
 }

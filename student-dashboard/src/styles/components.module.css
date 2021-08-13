@@ -9,6 +9,7 @@
 }
 
 .nav-text {
+  font-family: "Noto Sans JP", sans-serif;
   margin-left: 15px;
   font-size: 2rem;
   font-weight: 500;
@@ -24,6 +25,7 @@
 }
 
 .nav-bar ul li {
+  font-family: "Noto Sans JP", sans-serif;
   list-style: none;
 }
 
@@ -70,11 +72,18 @@ tr:nth-child(2n) {
   background-color: white;
 }
 
+td {
+  font-family: "Noto Sans JP", sans-serif;
+}
 tr:hover,
 :is(tr:hover) td {
   background-color: #61605e;
   color: white;
   border: none;
+}
+
+:is(tr:hover) svg {
+  fill: #c9c4c4;
 }
 
 /* pagination bar */
@@ -183,10 +192,107 @@ tr:hover,
 
 .search-bar {
   padding: 0.3rem;
-  border: 1px solid rgb(201, 196, 196);
+  border: 1px solid #c9c4c4;
 }
 
 .search-bar:focus {
-  border: 1px solid #61605e;
-  outline: 1px solid #004680;
+  outline: 1px solid #61605e;
+}
+
+/* Add student Prompt */
+
+.add-student-prompt {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #404950d3;
+}
+
+.popup-box-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  padding: 0 0 3rem 1.5rem;
+}
+
+.remove-add-prompt-button {
+  cursor: pointer;
+  font-size: 3rem;
+  font-family: "roberto";
+  color: #fffffff8;
+  opacity: 1;
+  z-index: 1;
+}
+
+.add-student-form {
+  position: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  padding: 2.5rem 0 2rem 0;
+  width: 90%;
+  height: 90%;
+  background-color: #fffffff8;
+  box-shadow: 0px 6px 5px 7px #00000045;
+  opacity: 1;
+}
+
+.add-student-form input,
+.add-student-form select {
+  background: none;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #c9c4c450;
+  color: #000000;
+  font-family: "nova square", cursive;
+  font-size: 1rem;
+  width: 70%;
+}
+
+.add-student-form option {
+  background: #61605e;
+  color: #ffffff;
+}
+
+.add-student-form button {
+  outline: none;
+  border: none;
+  padding: 0.4rem;
+  background: #61605e;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "nova square", cursive;
+  font-size: 1.2rem;
+}
+.remove-add-prompt-button:hover {
+  color: #000000;
+}
+.add-student-form button:hover {
+  background: #000000 !important;
+}
+
+/* Generic Classnames */
+
+.flex-colum-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+/* Add Button */
+.add-button {
+  background: #ffffff;
+  padding: 0.3rem;
+  outline: none;
+  border: none;
 }

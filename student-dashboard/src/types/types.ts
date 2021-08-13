@@ -4,18 +4,11 @@ export interface FormEntryProps {
   formReference?: RefObject<HTMLFormElement>;
   formDataHandler?: Function;
   editMode?: boolean;
+  className?: string;
 }
 
 export interface FormValueTypes {
   [value: string]: string;
-}
-
-export interface StudentData {
-  name: string;
-  status: string;
-  city: string;
-  country: string;
-  code: number;
 }
 
 export interface FilterComponentProps {
@@ -52,19 +45,29 @@ export interface SearchBarProps {
   searchFilter?: Function;
 }
 
+export interface SortComponentProps {
+  data?: StudentData[];
+  sortFunction?: MouseEventHandler<FormFields>;
+}
+
 export interface StudentTableComponent {
   props: {
     data?: StudentData[];
+    editable?: boolean;
   };
   state: {
     currentPage: number;
     studentsPerPage: number;
-    isCurrent?: boolean;
+    isAddClicked?: boolean;
     record: StudentData[];
+    tableData?: StudentData[];
   };
 }
 
-export interface SortComponentProps {
-  data?: StudentData[];
-  sortFunction?: MouseEventHandler<FormFields>;
+export interface StudentData {
+  name: string;
+  status: string;
+  city: string;
+  country: string;
+  code: number;
 }

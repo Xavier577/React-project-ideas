@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./styles/global.css";
 import NavBar from "./components/navBar";
 import DashBoard from "./pages/dashboard";
 import AdminPage from "./pages/adminPage";
 import HomePage from "./pages/homepage";
+import "./styles/global.css";
 
 function App() {
   return (

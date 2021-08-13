@@ -2,6 +2,8 @@ import { Component, Fragment, MouseEvent, createRef, RefObject } from "react";
 import usePaginate from "../hooks/usePaginate";
 import Style from "../styles/components.module.css";
 import { StudentData, StudentTableComponent as STC } from "../types/types";
+import AddIcon from "./addIcon";
+import AddStudentPopUP from "./addStudentPopUp";
 
 export default class StudentTable extends Component<
   STC["props"],
@@ -17,6 +19,7 @@ export default class StudentTable extends Component<
       record: JSON.parse(
         localStorage.getItem("studentData") as string
       ) as StudentData[],
+      isAddClicked: false,
     };
   }
 
@@ -62,19 +65,29 @@ export default class StudentTable extends Component<
     });
   };
 
+  private removeAddStudentPrompt = () => {
+    this.setState({ isAddClicked: false });
+  };
+
   render() {
     const { currentPage } = this.state;
-    const { data } = this.props;
+    const { data, editable } = this.props;
     //eslint-disable-next-line
     const { renderPageNumbers, renderTableBody, pageNumbers } = usePaginate(
       data,
       this.state,
-      this.handleClick
+      this.handleClick,
+      editable
     );
 
     return (
       <div className={Style["student-table-container"]}>
-        {this.props.data?.length ? (
+        {this.state.isAddClicked ? (
+          <AddStudentPopUP
+            removeFunction={() => this.removeAddStudentPrompt()}
+          />
+        ) : null}
+        {data?.length ? (
           <Fragment>
             <table className={Style["student-table"]}>
               <thead>
@@ -85,6 +98,17 @@ export default class StudentTable extends Component<
                   <th>Country</th>
                   <th>City</th>
                   <th>Code</th>
+                  {editable ? (
+                    <th
+                      onClick={() =>
+                        this.setState({
+                          isAddClicked: !this.state.isAddClicked,
+                        })
+                      }
+                    >
+                      <AddIcon />
+                    </th>
+                  ) : null}
                 </tr>
               </thead>
               <tbody>{renderTableBody}</tbody>
@@ -107,7 +131,21 @@ export default class StudentTable extends Component<
             </ul>
           </Fragment>
         ) : this.state.record.length < 1 ? (
-          "No student currently in record..."
+          <span className={Style["flex-colum-center"]}>
+            No student currently in record add students to see them in the
+            student table...
+            <br />
+            {editable ? (
+              <button
+                className={Style["add-button"]}
+                onClick={() =>
+                  this.setState({ isAddClicked: !this.state.isAddClicked })
+                }
+              >
+                <AddIcon />
+              </button>
+            ) : null}
+          </span>
         ) : (
           "Student Does not exist in record..."
         )}

@@ -2,10 +2,12 @@ import { FC, FormEvent, Fragment } from "react";
 import useForm from "../hooks/useForm";
 import { FormEntryProps } from "../types/types";
 
+
 const FormEntry: FC<FormEntryProps> = ({
   formReference,
   formDataHandler,
   editMode,
+  className,
 }) => {
   const { values, handleChange } = useForm({
     name: "",
@@ -17,6 +19,7 @@ const FormEntry: FC<FormEntryProps> = ({
   return (
     <Fragment>
       <form
+        className={className}
         ref={formReference}
         onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
       >
@@ -67,7 +70,7 @@ const FormEntry: FC<FormEntryProps> = ({
           required
         />
         <button onClick={() => formDataHandler?.(formReference?.current)}>
-          Add student
+          Add Student
         </button>
       </form>
     </Fragment>

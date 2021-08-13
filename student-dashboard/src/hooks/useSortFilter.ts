@@ -17,9 +17,15 @@ const useSortFilter = (
       let dataHelper =
         (fieldToSortBy as string) === ""
           ? [...data]
-          : [...data].sort((a, b) =>
-              b[fieldToSortBy] < a[fieldToSortBy] ? 1 : -1
-            );
+          : [...data].sort((a, b) => {
+              let first = a[fieldToSortBy];
+              let second = b[fieldToSortBy];
+              if (fieldToSortBy === "code") {
+                first = parseFloat(a[fieldToSortBy].toString());
+                second = parseFloat(b[fieldToSortBy].toString());
+              }
+              return second < first ? 1 : -1;
+            });
       clonedStateDispatcher(() => dataHelper);
     },
   };

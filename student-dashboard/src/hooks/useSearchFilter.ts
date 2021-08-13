@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { StudentData } from "../types/types";
+import { FieldParams, StudentData } from "../types/types";
 
 const useSearchFilter = (
   data: StudentData[],
@@ -7,8 +7,17 @@ const useSearchFilter = (
 ) => {
   return {
     searchFilter: (event: ChangeEvent<HTMLInputElement>) => {
+      let fields = [
+        "name",
+        "status",
+        "country",
+        "city",
+        "code",
+      ] as FieldParams[];
       let dataHelper = data.filter((entry) =>
-        entry.name.includes(event.target.value.toLowerCase())
+        fields.some((key) =>
+          entry[key].toString().includes(event.target.value.toLowerCase())
+        )
       );
       clonedStateDispatcher(() => dataHelper);
     },
